@@ -1,5 +1,5 @@
-QT       += core gui
-
+QT       += core gui opengl
+# opengl add .pro
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
@@ -15,8 +15,7 @@ SOURCES += \
 HEADERS += \
     mainwindow.h
 
-FORMS += \
-    mainwindow.ui
+FORMS +=
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -25,3 +24,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     doc.qrc
+
+# also need to add another line in your project file so that it will load both the OpenGL and GLu (OpenGL Utilities) libraries during startup.
+# Without these two libraries, you program will not be able to run:
+
+# LIBS += -lopengl32 -lglu32

@@ -1,13 +1,15 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
+#include <QOpenGLWindow>
+#include <QSurfaceFormat>
+#include <QOpenGLFunctions>
+#include <QtOpenGL>
+#include <GL/glu.h>
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
+
+class MainWindow : public QOpenGLWindow
 {
     Q_OBJECT
 
@@ -15,7 +17,15 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+protected:
+    virtual void initializeGL();
+    virtual void resizeGL(int w, int h);
+    virtual void paintGL();
+    void paintEvent(QPaintEvent *event);
+    void resizeEvent(QResizeEvent *event);
+
 private:
-    Ui::MainWindow *ui;
+    QOpenGLContext* context;
+    QOpenGLFunctions* openGLFunctions;
 };
 #endif // MAINWINDOW_H
